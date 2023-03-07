@@ -22,7 +22,6 @@ class Queue(AbstractQueue):
         if len(self._data) == 0:
             self.head = None
             self.tail = None
-        self.head = self._data[1]
         self.__length -= 1
         return self._data.pop(0)
 
