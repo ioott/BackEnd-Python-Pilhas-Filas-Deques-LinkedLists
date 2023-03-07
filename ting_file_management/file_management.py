@@ -12,5 +12,5 @@ def txt_importer(path_file):
         return []
 
     with open(path_file, "r") as file:
-        lines = file.read().split("\n")
-    return lines
+        content = file.read().split("\n")
+    return content
