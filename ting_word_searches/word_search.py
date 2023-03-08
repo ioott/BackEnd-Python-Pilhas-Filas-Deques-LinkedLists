@@ -1,5 +1,5 @@
 def exists_word(word, instance):
-    result = []
+    result = {}
 
     for item in instance._data:
         nome_do_arquivo = item['nome_do_arquivo']
@@ -7,18 +7,17 @@ def exists_word(word, instance):
 
         for index, line in enumerate(linhas_do_arquivo):
             if word.lower() in line.lower():
-                if not any(
-                    item['arquivo'] == nome_do_arquivo
-                    for item in result
-                ):
-                    result.append({
-                        'palavra': word,
+                if nome_do_arquivo not in result:
+                    result[nome_do_arquivo] = {
                         'arquivo': nome_do_arquivo,
-                        'ocorrencias': [{'linha': index + 1}]
-                    })
-                result[nome_do_arquivo].append({'linha': index + 1})
+                        'ocorrencias': [],
+                        'palavra': word,
+                    }
+                result[nome_do_arquivo]['ocorrencias'].append({
+                    'linha': index + 1
+                })
 
-    return result
+    return list(result.values())
 
 
 def search_by_word(word, instance):
